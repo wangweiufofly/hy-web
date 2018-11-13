@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hy.app.company.info.dao.ICompanyDao">
+    <select id="queryCompanyById" parameterType="java.lang.Long"
+            resultType="com.hy.app.company.info.entity.Company">
+        SELECT
+        company_id, img_src, introduction, company_name,company_title,
+        create_time, phone_json, address,email,
+        qq, webchat, map_card
+        FROM t_company
+        where company_id=#{companyId}
+    </select>
+    <!-- insert -->
+    <insert id="insertCompany"
+            parameterType="com.hy.app.company.info.entity.Company">
+        INSERT INTO
+        t_company(company_id, img_src, introduction, company_name,company_title,
+        create_time, phone_json, address,
+        qq, webchat, map_card)
+        VALUES
+        (#{companyId},#{imgSrc},#{introduction},#{companyName},#{companyTitle},
+        #{createTime},#{phoneJson},#{address},#{qq},#{webchat},#{mapCard})
+    </insert>
+    <!-- insert -->
+
+    <!-- delete -->
+    <delete id="deleteCompany"
+            parameterType="com.hy.app.company.info.entity.Company">
+        delete from t_company where company_id=#{companyId}
+    </delete>
+    <!-- delete -->
+</mapper>

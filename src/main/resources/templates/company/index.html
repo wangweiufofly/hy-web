@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="base/layout">
+    <!-- layout文件路径-->
+    <head>
+        <meta charset="utf-8" />
+        <title>首页</title>
+    </head>
+
+    <body>
+
+    <div layout:fragment="content">
+        <!-- BEGIN #slider -->
+        <div id="slider" class="section-container p-0 bg-black-darker">
+            <!-- BEGIN carousel -->
+            <div id="main-carousel" class="carousel slide" data-ride="carousel">
+
+                <!-- BEGIN carousel-inner -->
+                <div class="carousel-inner">
+                    <div th:if="${not #lists.isEmpty(banners)}" th:each="data,dataStat : ${banners}"  th:class="${dataStat.first} ? 'item active' : 'item'">
+                        <img th:src="${data.imgSrc}" class="bg-cover-img" alt="" />
+                    </div>
+                    <!-- END carousel-inner -->
+                    <a class="left carousel-control" href="#main-carousel" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="right carousel-control" href="#main-carousel" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </div>
+            </div>
+            <!-- END carousel -->
+        </div>
+    <!-- END #slider -->
+
+
+    <!-- BEGIN #about-us-content -->
+    <div id="about-us-content" class="section-container bg-white">
+        <!-- BEGIN container -->
+        <div class="container">
+            <!-- BEGIN about-us-content -->
+            <div class="about-us-content">
+                <h2 class="title text-center">我们能做什么？</h2>
+                <p class="desc text-center">
+                    我们是一家集品牌策划，创意设计，执行为一体的
+                    综合性广告公司<br />
+                    新时代中我们擅长运用新形式的设计广告，抢占有价值的营销先机
+                </p>
+
+                <!-- BEGIN row -->
+                <div class="row">
+
+                    <!-- begin col-4 -->
+                    <div th:if="${not #lists.isEmpty(products)}" th:each="data,dataStat : ${products}"  class="col-md-4 col-sm-4">
+                        <div class="service">
+                            <div class="productIcon">
+                                <a th:href="'/product?productId='+${data.productId}">
+                                    <img th:src="${data.imgSrc}" alt="" />
+                                </a>
+                            </div>
+                            <div class="info">
+                                <h4 class="title" th:text="${data.productName}"></h4>
+                                <p class="desc" th:text="${data.productDesc}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END row -->
+            </div>
+            <!-- END about-us-content -->
+        </div>
+        <!-- END container -->
+    </div>
+    <!-- END #about-us-content -->
+
+
+
+
+        </div>
+
+    </body>
+</html>

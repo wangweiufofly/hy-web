@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="base/layout">
+    <!-- layout文件路径-->
+    <head>
+        <meta charset="utf-8" />
+        <title>首页</title>
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+            <!-- BEGIN #page-header -->
+            <div id="page-header" class="section-container page-header-container bg-black">
+                <!-- BEGIN page-header-cover -->
+                <div class="page-header-cover">
+                    <img src="/commerce/assets/img/contact-us-cover.jpg" alt="" />
+                </div>
+                <!-- END page-header-cover -->
+                <!-- BEGIN container -->
+                <div class="container">
+                    <h1 class="page-header" id="product-header"><b>公司</b> 新闻</h1>
+                </div>
+                <!-- END container -->
+            </div>
+            <!-- BEGIN #page-header -->
+
+            <div id="contact-news" class="section-container bg-silver">
+                <!-- BEGIN container -->
+                <div class="container">
+                    <!-- BEGIN breadcrumb -->
+                    <ul class="breadcrumb m-b-10 f-s-12">
+                        <li><a href="/index">首页</a></li>
+                        <li class="active">公司新闻</li>
+                    </ul>
+                    <!-- END breadcrumb -->
+                    <!-- BEGIN row -->
+                    <div class="row" id="newsDiv">
+
+                        <div th:if="${not #lists.isEmpty(newses)}" th:each="data,dataStat : ${newses}" class="col-md-3 m-b-10 f-s-10">
+                            <!-- begin card -->
+                            <div class="card">
+                                <img class="card-img-top" th:src="${data.shareImg}" alt=""/>
+                                <div class="card-block">
+                                    <h4 class="card-title m-t-0 m-b-10" th:text="${data.newsName}"></h4>
+                                    <p class="card-text" th:text="${data.newsTitle}"></p>
+                                    <a href="#" class="btn btn-sm btn-primary" th:text="${data.createTimeDesc}"></a>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                    </div>
+                    <!-- END row -->
+                    <!--<div -->
+
+                    <!-- BEGIN pagination -->
+                    <!--<page pageClick="queryNewses" pageUIChange="queryNewses"/>-->
+                    <div th:replace="base/template :: page('queryNewses')"></div>
+                    <script th:inline="javascript" th:src="@{/js/news.js}"></script>
+                    <!-- END pagination -->
+                </div>
+                <!-- END row -->
+            </div>
+        </div>
+
+    </body>
+
+</html>

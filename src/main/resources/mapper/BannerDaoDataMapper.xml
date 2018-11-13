@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hy.app.company.banner.dao.IBannerDao">
+    <select id="queryBanners"
+            resultType="com.hy.app.company.banner.entity.Banner">
+        SELECT
+        img_src, create_time, company_id, banner_name,
+        banner_title, banner_id, sort_num
+        FROM t_banner
+        order by sort_num
+    </select>
+    <!-- insert -->
+    <insert id="insertBanner"
+            parameterType="com.hy.app.company.banner.entity.Banner">
+        INSERT INTO
+        t_banner(img_src, create_time, company_id, banner_name,
+        banner_title, banner_id, sort_num)
+        VALUES
+        (#{imgSrc},#{createTime},#{companyId},#{bannerName},
+        #{bannerTitle},#{bannerId},#{sortNum})
+    </insert>
+
+    <!-- insert -->
+
+    <!-- delete -->
+    <delete id="deleteBanner"
+            parameterType="com.hy.app.company.banner.entity.Banner">
+        delete from t_banner where banner_id=#{bannerId}
+    </delete>
+    <!-- delete -->
+</mapper>

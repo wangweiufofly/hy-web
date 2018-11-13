@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hy.app.company.product.dao.IProductDao">
+    <select id="queryProducts"
+            resultType="com.hy.app.company.product.entity.Product">
+        SELECT
+        p.product_id, p.product_name, p.product_desc, p.create_time,
+        count(1) imgNum,max(i.img_src) imgSrc
+        FROM t_product p,t_product_img i where p.product_id=i.product_id
+        group by p.product_id, p.product_name, p.product_desc, p.create_time
+    </select>
+    <select id="queryProductById" parameterType="java.lang.Long"
+            resultType="com.hy.app.company.product.entity.Product">
+        SELECT
+        product_id, product_name, product_desc, create_time
+        FROM t_product where product_id=#{productId}
+    </select>
+
+
+    <select id="queryProductImgs" parameterType="com.hy.app.company.product.entity.ProductParam"
+            resultType="com.hy.app.company.product.entity.ProductImg">
+        SELECT
+        product_id, img_src,create_time
+        FROM t_product_img where product_id=#{productId}
+    </select>
+
+    <!-- insert -->
+    <insert id="insertProduct"
+            parameterType="com.hy.app.company.product.entity.Product">
+        INSERT INTO
+        t_product(product_id, product_name, product_desc, create_time)
+        VALUES
+        (#{productId},#{productName},#{productDesc},#{createTime})
+    </insert>
+
+    <!-- insert -->
+
+    <!-- delete -->
+    <delete id="deleteProduct"
+            parameterType="com.hy.app.company.product.entity.Product">
+        delete from t_product where product_id=#{productId}
+    </delete>
+    <!-- delete -->
+</mapper>

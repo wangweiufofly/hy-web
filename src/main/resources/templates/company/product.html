@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="base/layout">
+    <!-- layout文件路径-->
+    <head>
+        <meta charset="utf-8" />
+        <title>产品</title>
+        <style type="text/css">
+            /*.search-container .search-sidebar{*/
+            /*width:20%;*/
+            /*}*/
+            /*.search-container .search-content{*/
+            /*width:80%;*/
+            /*}*/
+            .item.item-thumbnail{
+                height: 240px;
+                padding: 2px;
+            }
+            .item.item-thumbnail .item-image{
+                height: 230px;
+                padding: 2px;
+            }
+            .item.item-thumbnail .item-image img {
+                height: 100%;
+                border-radius: 5px 5px 0 0;
+                box-shadow: 0 6px 15px -6px #000;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+
+            <!-- BEGIN #page-header -->
+            <div id="page-header" class="section-container page-header-container bg-black">
+                <!-- BEGIN page-header-cover -->
+                <div class="page-header-cover">
+                    <img src="/commerce/assets/img/apple-cover.jpg" alt="" />
+                </div>
+                <!-- END page-header-cover -->
+                <!-- BEGIN container -->
+                <div class="container">
+                    <h1 class="page-header" id="product-header"><b>中意广告</b>:<label th:text="${productName}"/></h1>
+                </div>
+                <!-- END container -->
+            </div>
+            <!-- BEGIN #page-header -->
+
+            <!-- BEGIN search-results -->
+            <div id="search-results" class="section-container bg-silver">
+                <!-- BEGIN container -->
+                <div class="container">
+                    <!-- BEGIN search-container -->
+                    <div class="search-container">
+                        <!-- BEGIN search-content -->
+                        <div class="search-content">
+                            <!-- BEGIN search-toolbar -->
+                            <div class="search-toolbar">
+                                <!-- BEGIN row -->
+                                <div class="row">
+                                    <ol class="breadcrumb pull-right">
+                                        <li><a href="/index">首页</a></li>
+                                        <li class="active">产品</li>
+                                    </ol>
+                                </div>
+                                <!-- END row -->
+                            </div>
+                            <!-- END search-toolbar -->
+                            <!-- BEGIN search-item-container -->
+                            <div class="search-item-container">
+                                <!-- BEGIN item-row -->
+                                <div class="item-row image gallery-group" id="imageDiv">
+
+                                    <div th:if="${not #lists.isEmpty(productImgs)}" th:each="data,dataStat : ${productImgs}"  class="item item-thumbnail image-inner">
+                                        <a th:href="${data.imgSrc}" class="item-image" data-lightbox="gallery-group">
+                                            <img th:src="${data.imgSrc}" alt="" />
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <!-- END item-row -->
+                            </div>
+                            <!-- END search-item-container -->
+                            <!-- BEGIN pagination -->
+                            <div th:replace="base/template :: page('queryProductImgs')"></div>
+                            <script th:inline="javascript" th:src="@{/js/product.js}"></script>
+                            <script type="text/javascript" th:inline="javascript">
+                                var productId=[[${productId}]];
+                            </script>
+                            <!-- END pagination -->
+                        </div>
+                        <!-- END search-content -->
+                        <!-- BEGIN search-sidebar -->
+                        <div class="search-sidebar">
+                            <h4 class="title">产品列表</h4>
+                            <ul class="search-category-list">
+                                <li th:if="${not #lists.isEmpty(products)}" th:each="data,dataStat : ${products}">
+                                    <a href="#"  th:onclick="'javascript:doProductQuery(\''+${data.productId}+'\',\''+${data.productName}+'\')'"  th:text="${data.productName}">
+                                        <span class="pull-right" th:text="(${data.imgNum})"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- END search-sidebar -->
+                    </div>
+                    <!-- END search-container -->
+                </div>
+                <!-- END container -->
+            </div>
+            <!-- END search-results -->
+
+        </div>
+
+    </body>
+</html>

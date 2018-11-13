@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="base/layout">
+    <!-- layout文件路径-->
+    <head>
+        <meta charset="utf-8" />
+        <title>首页</title>
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+                <!-- BEGIN #page-header -->
+                <div id="page-header" class="section-container page-header-container bg-black">
+                    <!-- BEGIN page-header-cover -->
+                    <div class="page-header-cover">
+                        <img src="/commerce/assets/img/contact-us-cover.jpg" alt="" />
+                    </div>
+                    <!-- END page-header-cover -->
+                    <!-- BEGIN container -->
+                    <div class="container">
+                        <h1 class="page-header" id="product-header"><b>联系</b> 我们</h1>
+                    </div>
+                    <!-- END container -->
+                </div>
+                <!-- BEGIN #page-header -->
+
+                <div id="contact-us" class="section-container bg-silver">
+                    <!-- BEGIN container -->
+                    <div class="container">
+                        <!-- BEGIN breadcrumb -->
+                        <ul class="breadcrumb m-b-10 f-s-12">
+                            <li><a href="/index">首页</a></li>
+                            <li class="active">联系我们</li>
+                        </ul>
+                        <!-- END breadcrumb -->
+                        <!-- BEGIN row -->
+                        <div class="account-container">
+                            <!-- BEGIN account-sidebar -->
+                            <div class="account-sidebar">
+                                <div class="account-sidebar-cover">
+                                    <img src="/commerce/assets/img/my-account-cover.jpg" alt=""/>
+                                </div>
+                                <div class="account-sidebar-content">
+                                    <h4 th:text="${company.companyName}"/>
+                                    <p th:text="${company.companyTitle}"/>
+                                    <p>
+                                        联系电话：
+                                    </p>
+                                    <p th:text="${company.phoneJson}"/>
+                                    <p>
+                                        地址：
+                                    </p>
+                                    <p th:text="${company.address}"/>
+                                </div>
+                            </div>
+                            <!-- END account-sidebar -->
+                            <!-- BEGIN account-body -->
+                            <div class="account-body">
+                                <!-- BEGIN row -->
+                                <div class="row">
+                                    <!-- BEGIN col-6 -->
+                                    <iframe width='100%' height='455' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' th:src='${company.mapCard}'></iframe>
+                                    <!-- END col-6 -->
+                                </div>
+                                <!-- END row -->
+                            </div>
+                            <!-- END account-body -->
+                        </div>
+                        <!-- END row -->
+                    </div>
+                    <!-- END row -->
+                </div>
+        </div>
+
+    </body>
+</html>

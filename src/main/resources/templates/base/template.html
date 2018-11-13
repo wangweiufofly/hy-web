@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<!-- BEGIN pagination -->
+	<div th:fragment="page(pageClick)">
+		<div class="text-center">
+			<ul class="pagination m-t-0" id="pageUL">
+			</ul>
+		</div>
+		<script th:src="@{/js/template.js}"></script>
+		<!-- END pagination -->
+		<script type="text/javascript" th:inline="javascript">
+			var pageClick = [[${pageClick}]];
+            pageUIChange(1,[[${iTotalPages}]]);
+		</script>
+	</div>
+
+</html>
